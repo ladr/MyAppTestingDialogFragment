@@ -11,10 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+    //Button with context menu
+    private Button btnChangeYear;
     //Tracks current contextual action mode
     private ActionMode currentActionMode;
     //Define the callback when ActionMode is activated
@@ -67,6 +70,16 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        btnChangeYear = (Button) findViewById(R.id.btnChangeYear);
+        btnChangeYear.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(currentActionMode != null) {return false; }
+                startActionMode(modeCallBack);
+                v.setSelected(true);
+                return true;
+            }
+        });
     }
 
 
